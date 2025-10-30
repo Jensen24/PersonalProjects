@@ -1,0 +1,39 @@
+body, html {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background: #202020;
+}
+
+#world {
+  display: block;
+  width: 100vw;
+  height: 100vh;
+  background: lightblue;
+}
+
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.instructions {
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+#enter-btn {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+.controls {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+}
