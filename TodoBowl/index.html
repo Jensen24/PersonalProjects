@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo Bowl</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div id="instructions">
+            <p>This application functions as a fun and unique way to store the users everyday tasks</p>
+        </div>
+        <div id="controls">
+            <input type="text" id="taskInput" placeholder="Type your task...">
+            <button id="addBtn">Add Task</button>
+        </div>
+        <img src="fishbowl.png" id="fishbowl" style="display:none;" onerror="alert('fishbowl.png not found!')" onload="console.log('Fishbowl loaded')">
+        <canvas id="world"></canvas>`
+        <script src="matter.min.js"></script>
+        <script src="script.js"></script>
+</body>
+</html>
