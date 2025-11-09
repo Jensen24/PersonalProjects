@@ -19,6 +19,13 @@ class Rectangle {
             point.y >= this.y - this.h &&
             point.y <= this.y + this.h);
     }
+
+    intersects(range) {
+        return !(range.x - range.w > this.x + this.w ||
+            range.x + range.w < this.x - this.w ||
+            range.y - range.h > this.y + this.h ||
+            range.y + range.h < this.y - this.h);     
+    }
 }
 
 class QuadTree {
@@ -72,10 +79,32 @@ class QuadTree {
     }
 }
 
+query(range, found) {
+    if (!found) {
+        found = [];
+    }
+    if (!this.boundary.intersects(range)) {
+        return;
+    } else {
+        for (let p of this.points) {
+            if (range.contains(p)) {
+                found.push(p);
+            }
+        }
+        if (this.divided) {
+            this.northwest.query(range, found);
+            this.northeast.query(range, found);
+            this.southwest.query(range, found);
+            this.southeast.query(range, found);
+        }
+    }
+    return found;
+}
+
     show() {
         stroke(255);
-        strokeWeight(1);
         noFill();
+        strokeWeight(1);
         rectMode(CENTER);
         rect(this.boundary.x, this.boundary.y, this.boundary.w * 2, this.boundary.h * 2)
         if (this.divided) {
@@ -85,7 +114,7 @@ class QuadTree {
             this.southwest.show();
         }
         for (let p of this.points) {
-            strokeWeight(4);
+            strokeWeight(2);
             point(p.x, p.y)
         }
     }
