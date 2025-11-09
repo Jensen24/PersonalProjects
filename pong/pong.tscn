@@ -1,13 +1,17 @@
-[gd_scene load_steps=16 format=3 uid="uid://dexsxfqk0spr5"]
+[gd_scene load_steps=20 format=3 uid="uid://dexsxfqk0spr5"]
 
 [ext_resource type="Texture2D" uid="uid://dvrb8efddt0aa" path="res://art/paddle.png" id="1_4opyw"]
-[ext_resource type="Script" uid="uid://c13e2vd5wh2vi" path="res://Logic/wall.gd" id="2_a6iag"]
+[ext_resource type="Script" uid="uid://b2h1iogl2ch2r" path="res://Logic/RightPaddle.gd" id="1_iwa0j"]
 [ext_resource type="Texture2D" uid="uid://clowikjgl4yq1" path="res://art/ball.png" id="2_pkvn5"]
+[ext_resource type="Script" uid="uid://cnqe1rr26pu36" path="res://LeftPaddle.gd" id="3_7860c"]
 [ext_resource type="Texture2D" uid="uid://drgpdyyomyqpl" path="res://art/separator.png" id="3_pkvn5"]
-[ext_resource type="Script" uid="uid://c8lllfghw7jgq" path="res://Logic/paddle.gd" id="4_7860c"]
 [ext_resource type="Script" uid="uid://cuuajh10k2qln" path="res://Logic/ball.gd" id="5_iwa0j"]
 [ext_resource type="Script" uid="uid://dfyuofrch3hbg" path="res://floor.gd" id="6_a6iag"]
 [ext_resource type="Script" uid="uid://byu4bvfoykr4q" path="res://Logic/ceiling.gd" id="7_a6iag"]
+[ext_resource type="Script" uid="uid://lelv43shsakr" path="res://Logic/LeftWall.gd" id="9_bb6i3"]
+[ext_resource type="Script" uid="uid://bect0q7t72swc" path="res://RightWall.gd" id="10_i1h74"]
+[ext_resource type="Script" uid="uid://cb6ckxivfr4al" path="res://Logic/LPlayer_Score.gd" id="11_i1h74"]
+[ext_resource type="Script" uid="uid://dg7tn5ij1kf8u" path="res://Logic/RPlayer_Score.gd" id="12_f1tab"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_iwa0j"]
 size = Vector2(8, 32)
@@ -42,7 +46,7 @@ metadata/_edit_use_anchors_ = true
 
 [node name="LPlatform" type="Area2D" parent="."]
 position = Vector2(25, 200)
-script = ExtResource("4_7860c")
+script = ExtResource("1_iwa0j")
 
 [node name="Sprite" type="Sprite2D" parent="LPlatform"]
 texture = ExtResource("1_4opyw")
@@ -52,7 +56,7 @@ shape = SubResource("RectangleShape2D_iwa0j")
 
 [node name="RPlatform" type="Area2D" parent="."]
 position = Vector2(615, 200)
-script = ExtResource("4_7860c")
+script = ExtResource("3_7860c")
 
 [node name="Sprite" type="Sprite2D" parent="RPlatform"]
 texture = ExtResource("1_4opyw")
@@ -90,14 +94,14 @@ position = Vector2(320, -0.5)
 shape = SubResource("RectangleShape2D_eipaa")
 
 [node name="LWall" type="Area2D" parent="."]
-script = ExtResource("2_a6iag")
+script = ExtResource("9_bb6i3")
 
 [node name="Collision" type="CollisionShape2D" parent="LWall"]
 position = Vector2(-0.5, 200)
 shape = SubResource("RectangleShape2D_ludyb")
 
 [node name="RWall" type="Area2D" parent="."]
-script = ExtResource("2_a6iag")
+script = ExtResource("10_i1h74")
 
 [node name="Collision" type="CollisionShape2D" parent="RWall"]
 position = Vector2(640.5, 200)
@@ -106,9 +110,25 @@ shape = SubResource("RectangleShape2D_trlu6")
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(320, 200)
 
+[node name="LPlayer Score" type="Label" parent="."]
+offset_left = 140.0
+offset_top = 180.0
+offset_right = 200.0
+offset_bottom = 220.0
+script = ExtResource("11_i1h74")
+
+[node name="RPlayer Score" type="Label" parent="."]
+offset_left = 420.0
+offset_top = 180.0
+offset_right = 480.0
+offset_bottom = 220.0
+script = ExtResource("12_f1tab")
+
 [connection signal="area_entered" from="LPlatform" to="LPlatform" method="_on_area_entered"]
 [connection signal="area_entered" from="RPlatform" to="RPlatform" method="_on_area_entered"]
 [connection signal="area_entered" from="Floor" to="Floor" method="_on_area_entered"]
 [connection signal="area_entered" from="Ceiling" to="Ceiling" method="_on_area_entered"]
 [connection signal="area_entered" from="LWall" to="LWall" method="_on_wall_area_entered"]
+[connection signal="area_entered" from="LWall" to="RPlayer Score" method="_on_l_wall_area_entered"]
 [connection signal="area_entered" from="RWall" to="RWall" method="_on_wall_area_entered"]
+[connection signal="area_entered" from="RWall" to="LPlayer Score" method="_on_r_wall_area_entered"]
