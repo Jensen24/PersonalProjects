@@ -11,7 +11,7 @@ function setup() {
 
 function draw() {
     if (mouseIsPressed) {
-        for (let i = 0; i < 5; i++) {
+        for (let i = 0; i < 1; i++) {
             let m = new Point(mouseX + random(-5, 5), mouseY + random(-5, 5));
             qtree.insert(m);
         }
